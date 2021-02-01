@@ -6,9 +6,16 @@ let ejs = require("ejs");
 let fs = require("fs");
 let pdf = require("html-pdf");
 app.set('view engine', 'ejs')
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.get("/", async (req, res) => {
+app.get('/',(req,res)=>{
+  res.render('index')
+})
 
+app.post("/", async (req, res) => {
+
+  let a=req.body;
 
   // oy yilni taxlaymiz
   let date = new Date();
@@ -21,12 +28,12 @@ app.get("/", async (req, res) => {
   const pdfPath = __dirname + `/public/${fileName}`;
 console.log(fileName.substring(fileName.length-4,4))
   
-   QRCode.toDataURL(`localhost:3000/fayllar/${fileName.substr(0,fileName.length-4)}`,(err,url)=>{
+   QRCode.toDataURL(`https://qrcode-uz.herokuapp.com/fayllar/${fileName.substr(0,fileName.length-4)}`,(err,url)=>{
     let options = {
-      fakultet: "Fizika-Matematika",
-      guruh: "1-1PMI19",
-      fish: "Ergashev Miraziz",
-      sabab: "Uylanganim va ishsizligim va oilaviy muammolar",
+      fakultet: a.fakultet,
+      guruh: a.guruh,
+      fish: a.fish,
+      sabab: a.sabab,
       qr:url,
       vaqt:new Date().toLocaleString(),
       sana: date,
