@@ -1,0 +1,2 @@
+[ 10/02/2021 14:45:29 ] UnicodeString::FromUTF16BE, fault string - high surrogat encountered without a low surrogate
+[ 10/02/2021 14:45:29 ] UnicodeString::FromUTF16BE, fault string - high surrogat encountered without a low surrogate
